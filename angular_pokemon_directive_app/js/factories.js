@@ -11,7 +11,7 @@ app.factory('Pokemon', ['$http', '$q', function($http, $q) {
 
     $http.get(pokedex).success(function(data) {
       pokeData = data.pokemon;
-      console.log(data.pokemon);
+      // console.log(data.pokemon);
 
       //get 5 pokemon
       for (var i = 0; i < 5; i++) {
@@ -23,22 +23,22 @@ app.factory('Pokemon', ['$http', '$q', function($http, $q) {
       $q.all(pokeUrls.map(function(pokemonLink) {
         return $http.get(pokemonUrl + '/' + pokemonLink).then(function(data) {
           var spriteResource = data.data.sprites;
-          console.log('sprite', data.data.sprites.length);
+          // console.log('sprite', data.data.sprites.length);
+          //if image, get it
           if (spriteResource.length) {
-          console.log('sprite2', spriteResource[0].resource_uri);
-            // console.log('link', spriteResource);
+            // console.log('sprite2', spriteResource[0].resource_uri);
             return $http.get(pokemonUrl + spriteResource[0].resource_uri).then(function(sprite) {
               data.data.image = pokemonUrl + sprite.data.image;
               return data.data;
             });
           } else {
-            data.data.image = null;
+            data.data.image = 'http://bloximages.chicago2.vip.townnews.com/azdailysun.com/content/tncms/live/components/lee_core_2/resources/images/classifieds-no-photo.gif?_dc=1444288418';
             return data.data;
           }
         });
       })).then(function(pokemons) {
-        deferred.resolve(pokemons);
         //collectung data, puts it into original promise
+        deferred.resolve(pokemons);
       });
     });
 
@@ -47,6 +47,3 @@ app.factory('Pokemon', ['$http', '$q', function($http, $q) {
 
   return Pokemon;
 }]);
-
-
-//sprite
