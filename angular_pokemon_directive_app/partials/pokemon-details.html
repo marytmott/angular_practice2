@@ -1,5 +1,7 @@
-<img src="http://pokeapi.co//api/v1/sprite/655/" />
-<h4>{{pokemon.name}}</h4>
+
+<h3>{{pokemon.name}}</h3>
+<img ng-show="pokemon.image" ng-src="{{pokemon.image}}" />
+<img ng-show="!pokemon.image" src="http://bloximages.chicago2.vip.townnews.com/azdailysun.com/content/tncms/live/components/lee_core_2/resources/images/classifieds-no-photo.gif?_dc=1444288418" />
 <ul>
   <li>Types:
     <ul>
