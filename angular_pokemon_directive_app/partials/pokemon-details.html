@@ -1,0 +1,14 @@
+<img src="http://pokeapi.co//api/v1/sprite/655/" />
+<h4>{{pokemon.name}}</h4>
+<ul>
+  <li>Types:
+    <ul>
+      <li ng-repeat="type in pokemon.types">{{type.name}}</li>
+    </ul>
+  </li>
+  <li>Moves:
+    <ul>
+      <li ng-show="!pokemon.moves.length">No moves found.</li>
+      <li ng-hide="!pokemon.moves.length" ng-repeat="move in pokemon.moves | limitTo: 6">{{move.name}}</li>
+    </ul>
+</ul>
