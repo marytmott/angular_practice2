@@ -1,5 +1,5 @@
 <h2>{{movieSpecs.Title}}</h2>
-<img ng-hide="movieSpecs.Poster === 'N/A'" ng-src="{{movieSpecs.Poster}}" />
+<img ng-if="movieSpecs.Poster !== 'N/A'" ng-src="{{movieSpecs.Poster}}" />
 <h4>Starring: {{movieSpecs.Actors}} </h4>
 <p>{{movieSpecs.plot}}</p>
 <h4>Additional Information:</h4>
