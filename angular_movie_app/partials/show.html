@@ -1,21 +1,24 @@
 <h2>{{movieSpecs.Title}}</h2>
-<img ng-src="{{movieSpecs.Poster}}" />
+<img ng-hide="movieSpecs.Poster === 'N/A'" ng-src="{{movieSpecs.Poster}}" />
 <h4>Starring: {{movieSpecs.Actors}} </h4>
 <p>{{movieSpecs.plot}}</p>
 <h4>Additional Information:</h4>
-<!-- <ul>
+<ul>
+  <li>Starring: {{movieSpecs.Actors}}</li>
+  <li>Director: {{movieSpecs.Director}}</li>
+  <li>Awards: {{movieSpecs.Awards}}</li>
   <li>Released: {{movieSpecs.Released}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
-  <li>{{movieSpecs.}}</li>
+  <li>Genre: {{movieSpecs.Genre}}</li>
+  <li>Runtime: {{movieSpecs.Runtime}}</li>
+  <li>Country: {{movieSpecs.Country}}</li>
+  <li>Language: {{movieSpecs.Language}}</li>
+  <li>Writers: {{movieSpecs.Writer}}</li>
+  <li>Metascore: {{movieSpecs.Metascore}}</li>
+  <li>IMDB Rating: {{movieSpecs.imdbRating}}</li>
+  <li>IMDB Votes: {{movieSpecs.imdbVotes}}</li>
 
 </ul>
-awards
+<!-- awards
 country
 director
 genre
