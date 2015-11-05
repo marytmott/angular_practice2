@@ -1,4 +1,3 @@
-
 <h3>{{pokemon.name}}</h3>
 <img ng-src="{{pokemon.image}}" />
 <ul>
@@ -9,7 +8,7 @@
   </li>
   <li>Moves:
     <ul>
-      <li ng-show="!pokemon.moves.length">No moves found.</li>
-      <li ng-hide="!pokemon.moves.length" ng-repeat="move in pokemon.moves | limitTo: limit">{{move.name}}</li>
+      <li ng-if="!pokemon.moves.length">No moves found.</li>
+      <li ng-if="pokemon.moves.length" ng-repeat="move in pokemon.moves | limitTo: limit">{{move.name}}</li>
     </ul>
 </ul>
