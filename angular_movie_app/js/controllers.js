@@ -19,4 +19,3 @@ app.controller('ShowController', ['$scope', '$routeParams', 'OmdbSearch', functi
     $scope.movieSpecs = data;
   });
 }]);
-//show page w/ info
