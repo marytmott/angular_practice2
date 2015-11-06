@@ -1,11 +1,23 @@
-app.controller('ShopController', ['$scope', 'ShopInventory', function($scope, ShopInventory) {
+app.controller('ShopController', ['$scope', '$location', 'ShopInventory', function($scope, $location, ShopInventory) {
+  function makeCategoryArray(dataArr) {
+    var categories = dataArr.map(function(tea) {
+      return tea.categories;
+    });
+    //i <3 you underscore!
+    //flatten array
+    categories = _.flatten(categories);
+    //remove duplicates
+    categories = _.uniq(categories);
+    // console.log(categories);
+    return categories;
+  }
+
   ShopInventory.getInventory().then(function(data) {
-    // console.log(data.data);
+    console.log(data.data);
     $scope.teas = data.data;
-    // $scope.categories = data.data.map()
+    $scope.categories = makeCategoryArray(data.data);
   });
-  $scope.tea = {};
-  // $scope.tea.quantity = 1;
+  $scope.alphabetical = '+name';
   $scope.shoppingBag = [];
   $scope.addToBag = function(tea, quantity) {
     var itemFound = false;
@@ -27,8 +39,8 @@ app.controller('ShopController', ['$scope', 'ShopInventory', function($scope, Sh
     //   tea.quantity = quantity;
     //   $scope.shoppingBag.push(tea);
     // }
-    console.log($scope.shoppingBag);
   };
-
-  // check if item exists and modify it!
+  $scope.checkout = function() {
+    $location.path('/shoppingBag');
+  }
 }]);

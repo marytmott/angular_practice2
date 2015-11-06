@@ -3,7 +3,7 @@
   <div class="col-md-6">
     <label>Search By Category:
       <select ng-model="categorySearch">
-        <option value=""></option>
+        <option ng-repeat="category in categories" value="{{category}}" multiple >{{category}}</option>
       </select>
     </label>
     <label>Search By Name:
@@ -12,7 +12,7 @@
   </div>
   <div class="col-md-6">
     <button ng-show="!shoppingBag.length">Checkout | Bag: Empty! </button>
-    <button ng-show="shoppingBag.length">Checkout | Bag: ({{ shoppingBag.length }})</button>
+    <button ng-show="shoppingBag.length" ng-click="checkout()">Checkout | Bag: ({{ shoppingBag.length }})</button>
   </div>
 </div>
 <!-- div "table" -->
@@ -33,7 +33,7 @@
     </span>
   </div>
 </div>
-<div class="row" ng-repeat="tea in teas | orderBy: price | filter: nameSearch">
+<div class="row" ng-repeat="tea in teas | orderBy: alphabetical | orderBy: price | filter: nameSearch | filter: categorySearch">
   <div class="container">
     <div class="row tea-box">
       <div class="col-md-4" ts-tea-image tea-data="tea">
