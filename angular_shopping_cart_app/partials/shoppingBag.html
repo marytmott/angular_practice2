@@ -1,3 +1,29 @@
 <div class="row">
-  <h2>My Shopping Bag</h2>
+  <div class="col-md-8">
+    <h3>My Shopping Bag</h3>
+  </div>
+  <div class="col-md-2">
+    <h3>Order total: TOTAL</h3>
+  </div>
+</div>
+<div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Sub-total</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="tea in shoppingBag">
+        <td>
+          <h3 ts-tea-name tea-data="tea"></h3>
+          <ts-tea-image tea-data="tea"></ts-tea-image>
+          <ts-info-cart tea-data="tea"></ts-info-cart>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

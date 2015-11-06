@@ -8,7 +8,6 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
     categories = _.flatten(categories);
     //remove duplicates
     categories = _.uniq(categories);
-    // console.log(categories);
     return categories;
   }
 
@@ -41,6 +40,6 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
   }
 }]);
 app.controller('ShoppingBagController', ['$scope', function($scope) {
-  $scope.shoppingBagData = JSON.parse(localStorage.getItem('shoppingBag'));
-  console.log($scope.shoppingBagData);
+  $scope.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'));
+  console.log($scope.shoppingBag);
 }])

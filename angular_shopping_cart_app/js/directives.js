@@ -14,9 +14,18 @@ app.directive('tsTeaImage', function() {
     }
   };
 });
-app.directive('tsTeaTitle', function() {
+app.directive('tsTeaName', function() {
   return {
-    templateUrl: '/partials/tea-title.html',
+    templateUrl: '/partials/tea-name.html',
+    scope: {
+      tea: '=teaData'
+    }
+  };
+});
+app.directive('tsInfoCart', function() {
+  console.log('called');
+  return {
+    templateUrl: '/partials/tea-info-cart.html',
     scope: {
       tea: '=teaData'
     }
