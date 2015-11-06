@@ -6,8 +6,8 @@ app.config(['$routeProvider', function($routeProvider) {
       controller: 'ShopController'
     })
     .when('/shoppingBag', {
-      templateUrl: 'partials/shop.html',
-      controller: 'ShopController'
+      templateUrl: 'partials/shoppingBag.html',
+      controller: 'ShoppingBagController'
     })
     .otherwise({redirectTo: '/'});
 }]);

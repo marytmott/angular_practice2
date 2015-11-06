@@ -22,25 +22,25 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
   $scope.addToBag = function(tea, quantity) {
     var itemFound = false;
     quantity = parseInt(quantity);
-    // if ($scope.shoppingBag.length) {
-      //update quantity
-      $scope.shoppingBag.forEach(function(item) {
-        if (item._id === tea._id) {
-          item.quantity = quantity;
-          itemFound = true;
-        }
-      });
-      if (!itemFound) {
-        tea.quantity = quantity;
-        $scope.shoppingBag.push(tea);
+
+    $scope.shoppingBag.forEach(function(item) {
+      if (item._id === tea._id) {
+        item.quantity = quantity;
+        itemFound = true;
       }
-    // } else {
-    //   //if shopping bag is empty
-    //   tea.quantity = quantity;
-    //   $scope.shoppingBag.push(tea);
-    // }
+    });
+    if (!itemFound) {
+      tea.quantity = quantity;
+      $scope.shoppingBag.push(tea);
+    }
   };
   $scope.checkout = function() {
+    var shoppingBagStorage = JSON.stringify($scope.shoppingBag);
+    localStorage.setItem('shoppingBag', shoppingBagStorage);
     $location.path('/shoppingBag');
   }
 }]);
+app.controller('ShoppingBagController', ['$scope', function($scope) {
+  $scope.shoppingBagData = JSON.parse(localStorage.getItem('shoppingBag'));
+  console.log($scope.shoppingBagData);
+}])
