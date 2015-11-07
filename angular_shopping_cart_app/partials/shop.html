@@ -11,8 +11,8 @@
     </label>
   </div>
   <div class="col-md-6">
-    <button ng-show="!shoppingBag.length">Checkout | Bag: Empty! </button>
-    <button ng-show="shoppingBag.length" ng-click="checkout()">Checkout | Bag: ({{shoppingBag.length}})</button>
+    <button class="btn btn-info" ng-show="!shoppingBag.length">Checkout | Bag: Empty! </button>
+    <button class="btn btn-info" ng-show="shoppingBag.length" ng-click="checkout()">Checkout | Bag: ({{shoppingBag.length}})</button>
   </div>
 </div>
 <!-- div "table" -->
@@ -36,31 +36,31 @@
 <div class="row" ng-repeat="tea in teas | orderBy: alphabetical | orderBy: price | filter: nameSearch | filter: categorySearch">
   <div class="container">
     <div class="row tea-box">
-      <div class="col-md-4" ts-tea-image tea-data="tea">
+      <div class="col-md-4">
+        <img ng-src="{{tea.imageUrl}}" />
       </div>
       <div  class="col-md-8">
         <div class="row">
-          <!-- spans? -->
           <div class="col-md-6">
-            <h2 ts-tea-name tea-data="tea"></h2>
+            <h2>{{tea.name}}</h2>
           </div>
           <div class="col-md-3">
             <h2>Quantity:</h2>
             <label>
               <select ng-model="quantity" ng-init="quantity=1">
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
               </select>
             </label>
-            <button ng-click="addToBag(tea, quantity)">Add To Bag</button>
+            <button class="btn btn-success" ng-click="addToBag(tea, quantity)">Add To Bag</button>
           </div>
         </div>
         <div ts-tea-details tea-data="tea">

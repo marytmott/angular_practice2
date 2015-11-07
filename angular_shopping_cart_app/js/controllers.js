@@ -10,17 +10,17 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
     categories = _.uniq(categories);
     return categories;
   }
-
+  $scope.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
   ShopInventory.getInventory().then(function(data) {
     console.log(data.data);
     $scope.teas = data.data;
     $scope.categories = makeCategoryArray(data.data);
   });
   $scope.alphabetical = '+name';
-  $scope.shoppingBag = [];
   $scope.addToBag = function(tea, quantity) {
     var itemFound = false;
     quantity = parseInt(quantity);
+    tea.subtotal = quantity * tea.price;
 
     $scope.shoppingBag.forEach(function(item) {
       if (item._id === tea._id) {
@@ -36,10 +36,53 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
   $scope.checkout = function() {
     var shoppingBagStorage = JSON.stringify($scope.shoppingBag);
     localStorage.setItem('shoppingBag', shoppingBagStorage);
-    $location.path('/shoppingBag');
+    $location.path('/shopping-bag');
   }
 }]);
+
 app.controller('ShoppingBagController', ['$scope', function($scope) {
+  function updateStorage() {
+    var shoppingBagStorage = JSON.stringify($scope.shoppingBag);
+    localStorage.setItem('shoppingBag', shoppingBagStorage);
+  }
+  function calcTotal() {
+    var total = 0;
+    $scope.shoppingBag.forEach(function(item) {
+      total += item.subtotal;
+    });
+    $scope.orderTotal = total;
+  }
   $scope.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag'));
   console.log($scope.shoppingBag);
+  $scope.editMode = false;
+  $scope.changeMode = function(tea) {
+    // console.log(tea.quantity);
+    // if clicking save (editMode @ true)
+    if ($scope.editMode) {
+      console.log(tea.quantity);
+      //if item quantity is 0
+      if (!tea.quantity) {
+        $scope.removeItem(tea);
+      } else {
+        $scope.shoppingBag.forEach(function(item) {
+          if (item._id === tea._id) {
+            item.quantity = parseInt(tea.quantity);
+            item.subtotal = tea.quantity * tea.price;
+          }
+        });
+      }
+      calcTotal();
+      updateStorage();
+    }
+    $scope.editMode = !$scope.editMode;
+  };
+  $scope.removeItem = function(tea) {
+    var teaIndex = $scope.shoppingBag.indexOf(tea);
+    $scope.shoppingBag.splice(teaIndex, 1);
+    calcTotal();
+    updateStorage();
+  };
+  calcTotal();
 }])
+
+//display shopping bag on first page if filled

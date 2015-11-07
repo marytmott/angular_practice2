@@ -3,7 +3,7 @@
     <h3>My Shopping Bag</h3>
   </div>
   <div class="col-md-2">
-    <h3>Order total: TOTAL</h3>
+    <h3>Order total: {{orderTotal | decimal | currency}}</h3>
   </div>
 </div>
 <div class="row">
@@ -19,11 +19,24 @@
     <tbody>
       <tr ng-repeat="tea in shoppingBag">
         <td>
-          <h3 ts-tea-name tea-data="tea"></h3>
-          <ts-tea-image tea-data="tea"></ts-tea-image>
+          <h3>{{tea.name}}</h3>
+          <img ng-src="{{tea.imageUrl}}" />
           <ts-info-cart tea-data="tea"></ts-info-cart>
         </td>
+        <td>
+          <p ng-hide="editMode">{{tea.quantity}}</p>
+          <input ng-show="editMode" type="number" ng-model="tea.quantity"/>
+        </td>
+        <td>
+          {{tea.subtotal | decimal | currency}}
+        </td>
+        <td>
+          <button class="btn btn-warning" ng-hide="editMode" ng ng-click="changeMode()">Edit</button>
+          <button class="btn btn-warning" ng-show="editMode" ng-click="changeMode(tea)">Save</button>
+          <button class="btn btn-danger" ng-click="removeItem(tea)">Remove</button>
+        </td>
       </tr>
+
     </tbody>
   </table>
 </div>

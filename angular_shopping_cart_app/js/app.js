@@ -5,7 +5,7 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/shop.html',
       controller: 'ShopController'
     })
-    .when('/shoppingBag', {
+    .when('/shopping-bag', {
       templateUrl: 'partials/shoppingBag.html',
       controller: 'ShoppingBagController'
     })
